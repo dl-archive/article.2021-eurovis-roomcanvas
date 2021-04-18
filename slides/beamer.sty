@@ -1,0 +1,178 @@
+\useinnertheme{rectangles}
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage[typewriter]{sourcecodepro}
+
+% BK: Schriftschnitt von Light auf Regular geändert:
+\usepackage[default,light,semibold]{sourcesanspro}
+% \usepackage[default,semibold]{sourcesanspro}
+% :-) go for it
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{datetime2}
+
+%\input{../../common/glsl-lstset}
+
+% Optimize black and grays for printing - using pure black and cyan tinted grays improves readability of prints.
+\definecolor{textblack}{cmyk}{0.00, 0.00, 0.00, 1.00}
+\definecolor{darkgray} {cmyk}{0.10, 0.00, 0.00, 0.66}
+\definecolor{lightgray}{cmyk}{0.05, 0.00, 0.00, 0.33}
+
+\definecolor{hpi@grey}  {RGB}{ 90, 96,101}
+\definecolor{hpi@red}   {RGB}{177,  6, 58}
+\definecolor{hpi@yellow}{RGB}{246,168,  0}
+\definecolor{hpi@orange}{RGB}{221, 97,  8}
+\definecolor{hpi@blue}  {RGB}{  0,122,158}
+
+\definecolor{eurovis@blue}  {RGB}{45, 108, 225}
+
+\definecolor{custom@green}{RGB}{58, 170, 53}
+\definecolor{custom@red}{RGB}{177, 6, 58}
+\definecolor{custom@gray}{RGB}{29, 29, 27}
+
+
+
+\setbeamercolor{postit}{fg=black,bg=white}
+
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{institute}{fg=gray}
+\setbeamercolor{frametitle}{fg=eurovis@blue}
+\setbeamercolor{footline}{fg=black}
+
+\setbeamercolor{normal text}{fg=black}
+
+\setbeamerfont{title}{size=\huge}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{institute}{size=\large}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{framesubtitle}{size=\scriptsize}
+\setbeamerfont{footline}{size=\tiny}
+
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+
+
+\color{textblack}
+
+\renewcommand\thempfootnote{\arabic{mpfootnote}}
+
+\newcommand{\grayout}{\textcolor{hpi@grey}}
+\newcommand{\blueify}{\textcolor{hpi@blue}}
+\newcommand{\redify}{\textcolor{hpi@red}}
+
+
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{item projected}{bg=black}
+\setbeamercolor{description item}{bg=black,fg=gray}
+\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+
+% \setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor{bibliography entry author}{bg=black,fg=gray}
+% \setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry location}{bg=black,fg=gray}
+\setbeamercolor{bibliography entry note}{bg=black,fg=gray}
+
+% \hypersetup{
+%     colorlinks,
+%     citecolor=gray,
+%     linkcolor=black
+% }
+
+\hypersetup{
+  colorlinks,
+  citecolor=hpi@grey,
+  linkcolor=hpi@grey,
+  urlcolor=eurovis@blue}
+
+\newcommand<>{\keyword}[1]{\textcolor{gray}{#1}}
+\newcommand<>{\keywordb}[1]{\textbf{\textcolor{gray}{#1}}}
+
+% TITLE PAGE (1st Page)
+\defbeamertemplate*{title page}{hpi}[1][]
+{
+	\raggedleft
+	\vspace{-26mm}
+	%
+	\usebeamerfont{title}\usebeamercolor[fg]{title}
+	\raggedright
+	
+	{\hspace{26mm}\includegraphics[height=8mm]{logos/acm-logo}}
+	\vspace{-10mm}
+	
+	\raggedleft
+	\includegraphics[height=4.7mm]{logos/vinci-logo}~
+	\inserttitle\par
+	%
+	\vspace{2mm}
+	%
+	\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}
+	\ifx\insertsubtitle\empty
+	% do nothing
+	\else
+    	\smallskip\insertsubtitle\enspace{}|\enspace{}%\par
+	\fi
+	%
+	\usebeamerfont{author}\usebeamercolor[fg]{author}
+	\ifx\insertauthor\empty
+	% do nothing
+	\else
+		%\smallskip
+		\textbf{\insertauthor}\par
+	\fi
+	%
+	\usebeamerfont{institute}\usebeamercolor[fg]{institute}
+	\ifx\insertinstitute\empty
+		% do nothing
+	\else
+		\smallskip\insertinstitute\par
+	\fi
+}
+
+
+% FRAME TITLE (Header)
+\defbeamertemplate*{frametitle}{hpi}
+{
+	\begin{beamercolorbox}[left, leftskip=8mm, ht=8mm, dp=1mm, wd=\paperwidth]{frametitle}
+		\usebeamerfont{frametitle}\insertframetitle{}
+	\end{beamercolorbox}
+	\nointerlineskip
+	\vspace{-16mm}
+	\begin{beamercolorbox}[right, rightskip=8mm, ht=16mm, dp=1mm, wd=\paperwidth]{}
+	    \includegraphics[height=5mm]{logos/uni-logo-cmyk}
+	    \hspace{2mm}
+	    \includegraphics[height=5mm]{logos/hpi-logo-cmyk}
+	    \hspace{2mm}
+	    \includegraphics[height=5mm]{logos/eurovis}
+	\end{beamercolorbox}
+	\vspace{-2mm}
+}
+
+
+% FOOT LINE (Footer)
+\defbeamertemplate*{footline}{cgi}
+{
+	\begin{beamercolorbox}[left, leftskip=8mm, rightskip=8mm, dp=2mm, wd=\paperwidth]{footline}
+		\insertpagenumber \quad \insertshorttitle 
+		\hfill \insertsubtitle %\insertsubtitle~\ifx\insertsectionhead\empty\else\slash~\insertsectionhead\fi
+		\hfill \insertauthor
+	\end{beamercolorbox}%
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{item projected}{fg=white,bg=eurovis@blue}
+\setbeamertemplate{enumerate items}[box]
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
