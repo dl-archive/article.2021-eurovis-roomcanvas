@@ -49,6 +49,9 @@
     }}
 }
 
+\usepackage{eso-pic}
+\setlength{\paperwidth}{210mm}\setlength{\paperheight}{297mm}% egpubl leaves them 0; needed by eso-pic
+\AddToShipoutPictureFG{\AtPageLowerLeft{\put(\LenToUnit{0.5\paperwidth},\LenToUnit{6mm}){\makebox[0pt][c]{\fontsize{6.5}{8}\selectfont\color{gray}Author's revised version (2026-11-08). Version of record: https://doi.org/10.2312/evs.20211048}}}}
 \begin{document}
 
 \teaser{
@@ -104,7 +107,7 @@
     \includegraphics[width=\linewidth]{figures/figure-2-components_embedded-v4.pdf} 
     \caption{From a given (a) floor plan, a (b) simplified 3D apartment representation is created via extrusion, which is then used for further preprocessing to increase visual quality and to compute and store data attributes: (c) detailed geometry is added, (d) ambient occlusion is prerendered, and (e) a block for lower floors—indicating the apartment’s floor level—and a ground plane are added. 
     At the same time, (f) floor-plan-based extrusion of simplified meshes representing the individual rooms' boundaries, (g) assignment of faces to the corresponding room surfaces, and (h) configuration of the sensors’ positions allow for corresponding aggregations and interaction events. For each sensor, (i) distances to every point in a discretized volume spanning the apartment's bounding box are precomputed using a three-dimensional flood fill variant and encoded in 3D textures, and (j) candidates for dynamic label placement are precalculated. 
-    (k) based on the outputs of those preprocessing steps, our visualization can interpolate, display, and label sensor data at interactive frame rates (even on smartphones).}
+    (k) Based on the outputs of those preprocessing steps, our visualization can interpolate, display, and label sensor data at interactive frame rates (even on smartphones).}
     \label{fig:visualization-components} 
 \end{figure*}
 
@@ -134,24 +137,24 @@ The sensors are connected to a ZigBee gateway (Raspbee) on a Raspberry Pi %
  running deCONZ home automation software.
 Node-RED is then used to filter, transform, and transmit raw sensor data to a real-time data analytics platform via the MQTT protocol. %
 There, the sensor data is semantically structured, analyzed as needed, and stored for efficient provision via authorized API requests.
-Additional data resources can and---in the case of outside weather information---are added and integrated here.
+Additional data resources can be and---in the case of outside weather information---are added and integrated here.
 In addition to raw data access, the analytics platform API supports requests for custom data resolutions, time ranges, accumulations, filtering, and more. 
-This, for example, allows to query for time-series as complex as the daily average in temperature around noon for every march of the last five years (assuming data was collected for that time span, obviously).%
+This, for example, allows querying time series as complex as the daily average in temperature around noon for every March of the last five years (assuming data was collected for that time span, obviously).%
 
 \paragraph*{Drawing of 3D Floor Plans}
 
-One of our main concerns when designing our 3D visualization was to prevent visual clutter from the beginning on.
+One of our main concerns when designing our 3D visualization was to prevent visual clutter from the beginning.
 Instead of using 3D LiDAR scans, photogrammetry, or complex CAD drawings, we model, enhance and optimize the 3D geometry ourselves.
 To this end, we create a minimal but accurate floor plan (\autoref{fig:visualization-components}~(a)), extrude walls, add ceilings and floors, account for special areas such as balconies, steps, etc., and finally, add doors and windows.
 During the whole process, we keep the number of faces and vertices as low as reasonably possible.
 
 To increase the authenticity of our floor plans, to provide a reference to the location of the apartment in its surrounding building (context), and to reduce the rendering complexity at run-time, we precompute a light map, e.g., accounting for local ambient occlusion~\cite{akenine2018}~(\autoref{fig:visualization-components}~(d)) and add a low-polygon representation of lower floors and (optionally) the immediate environment~(\autoref{fig:visualization-components}~(e)).
-Furthermore, we compute the sun position~\cite{kolivand2011-realtime} and approximate physically plausible soft-shadows~\cite{molzer2019-interactive} in real-time using multi-frame sampling~\cite{limberger2017-progressive}.
+Furthermore, we compute the sun position~\cite{kolivand2011-realtime} and approximate physically plausible soft shadows~\cite{molzer2019-interactive} in real-time using multi-frame sampling~\cite{limberger2017-progressive}.
 
 \paragraph*{Semantic Enrichment of 3D Floor Plans}
 
 We group every polygon of the geometry into semantic units and layers such as lateral walls, ceilings, floors~(\autoref{fig:visualization-components}~(f--g)). 
-To allow for user-interaction with individual rooms, we apply a naming scheme and finally store everything as a glTF model.
+To allow for user interaction with individual rooms, we apply a naming scheme and finally store everything as a glTF model.
 Applying this process enabled us to understand the optimal characteristics of the 3D model and to identify techniques for its semi-automated computation in the future.
 
 \begin{figure}[t]
@@ -169,7 +172,7 @@ First, we create a cuboid with sufficient extent and reasonable resolution, i.e.
 Second, we compute a binary 3D floor plan, storing whether or not a cell intersects with at least one polygon  (ceiling, floor, walls, etc.).
 Finally, we use a modified flooding algorithm to create a 16\,bit distance map per sensor.
 This needs to be done only once per sensor. 
-Adding new sensors does not invalidate earlier distance maps, and only requires to compute a single additional distance map.
+Adding new sensors does not invalidate earlier distance maps, and only requires computing a single additional distance map.
 Since WebAPIs do not have native support for 3D images, we use multiple distance maps---sliced into rows and columns of regular 2D images---encoded in one or more texture atlases.
 Since there is no 16\,bit support either, the low and high bytes are spread over subsequent color channels.
 
@@ -178,7 +181,7 @@ Since there is no 16\,bit support either, the low and high bytes are spread over
 We manually specify suitable locations for automated text placement~(\autoref{fig:visualization-components}~(j)). 
 More specifically, we define rectangles within the 3D floor plan, primarily aligned to floors and upper parts of lateral surfaces.
 We apply the naming scheme we used for the rooms to the rectangles and store them in an extra layer within the glTF assets.
-While loading the rectangles, label locations are derived, based on a starting point, an up vector, and a forward-facing vector, and a text running direction with its length encoding the maximum possible text length.
+While loading the rectangles, label locations are derived, based on a starting point, an up vector, a forward-facing vector, and a text running direction with its length encoding the maximum possible text length.
 
 \paragraph*{Outside Temperature}
 
@@ -208,7 +211,7 @@ To increase the quality of the spatial interpolation, advanced spatial interpola
 
 For the volumetric visualization of interpolated sensor data (\autoref{fig:teaser}~(c)), we use a ray-marching-based approach of tracing through the rooms’ volumes up to their respective back-faces (\autoref{fig:visualization-components}~(g)) and aggregating the sampled, interpolated sensor values along the way.
 At each sampled volume location, we again color-map the respective interpolated sensor value to an RGB color value using the selected color scale, while at the same time using a configurable opacity transfer function to determine the sample’s opacity.
-We then accumulate the samples using a standard front-to-back compositing equation and progressively enhance the visual quality of the volume rendering by shifting a pseudo-random generated hash used for jittering, and by adaptively increasing the sampling resolution. 
+We then accumulate the samples using a standard front-to-back compositing equation and progressively enhance the visual quality of the volume rendering by shifting a pseudo-randomly generated hash used for jittering, and by adaptively increasing the sampling resolution. 
 
 \paragraph*{Dynamic Label Placement} 
 
@@ -242,7 +245,7 @@ Therein, the use of shadow mapping improves the perception of seasonal and daily
 
 \paragraph*{Sample Use Case}
 
-One possible use case for RoomCanvas is to determine in which areas of an apartment (either abstracted to the room level, or freely on any given position) a certain temperature threshold is exceeded or fallen below, potentially averaged temporally over a certain time interval, such as in six-hours intervals. 
+One possible use case for RoomCanvas is to determine in which areas of an apartment (either abstracted to the room level, or freely on any given position) a certain temperature threshold is exceeded or fallen below, potentially averaged temporally over a certain time interval, such as in six-hour intervals. 
 By combining the capability of RoomCanvas to precisely interpolate and display such data based on recorded temperature data with its ability of adding temporal and spatial context (through the simulated sun position, real-time rendered shadows, and recognizable visual details of the 3D floor plan), we aim to simplify such use cases---use cases which otherwise could possibly only be tackled by looking at 2D plots and charts and thus without spatial and temporal context.
 
 \paragraph*{Interactive Visualizations}
@@ -252,11 +255,11 @@ By loading preprocessed assets---a \emph{glTF binary file} containing the presen
 
 \section{Conclusion \& Future Work}
 
-We have introduced a system for high-quality visualization of built environments, that combines spatial and temporal aspects of a variety of sensor data. 
+We have introduced a system for high-quality visualization of built environments that combines spatial and temporal aspects of a variety of sensor data. 
 The system can be used to generate aesthetic still images as well as to provide interactive access to real-time sensor data.
 The fusion of the 3D floor plan with the unified sensor data representation potentially facilitates exploration and correlation of temporal changes in data to past events and actions of occupants.
 
-Following the development of the visualization system, further research needs to be conducted to extend this approach to be applied on larger buildings as well as industrial facilities, that are modeled using complex data models and standards in CAD, BIM (\emph{IFC}), or city modeling (\emph{CityGML}). Here, the challenge is in how to scale the solution to support those large-scale models in terms of data processing, transmission, and rendering.
+Following the development of the visualization system, further research needs to be conducted to extend this approach to be applied on larger buildings as well as industrial facilities that are modeled using complex data models and standards in CAD, BIM (\emph{IFC}), or city modeling (\emph{CityGML}). Here, the challenge is how to scale the solution to support those large-scale models in terms of data processing, transmission, and rendering.
 To make our system more accessible, one could simplify the currently manual process of drawing 3D floor plans, for example, by providing an export plug-in for consumer tools such as Sweet Home 3D. 
 
 As related work provided promising approaches to finding the optimal number of sensors for a given location in other use case domains\cite{jedermann2009-minimum}, we believe that a minimum number of sensors can also be determined in an apartment or house, resulting in optimized resource usage while maintaining measurement quality.

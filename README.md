@@ -33,13 +33,22 @@ DOI: [10.2312/evs.20211048](https://doi.org/10.2312/evs.20211048) · Author's ve
 ```
 
 The paper was compiled on Overleaf in 2021 (pdfTeX 1.40.21, microtype 2.7).
-The TeX Live 2019 container reproduces `koenig2021-roomcanvas-as-submitted.pdf` pixel-identically; with TeX Live 2020 or later (microtype ≥ 2.8) three paragraphs break their lines differently (same text, same page count).
+On `main`, the build produces the revised version (`v1.1-revised`). Check out `v1.0-camera-ready` to reproduce `koenig2021-roomcanvas-as-submitted.pdf`: the TeX Live 2019 container reproduces it pixel-identically; with TeX Live 2020 or later (microtype ≥ 2.8) three paragraphs break their lines differently (same text, same page count).
 
 The slides build (TeX Live 2020) reproduces `koenig2021-roomcanvas-slides.pdf` (identical text and layout; one image on page 2 differs by a few pixels).
 
 ## Versions
 
 - [`v1.0-camera-ready`](https://github.com/dl-archive/article.2021-eurovis-roomcanvas/tree/v1.0-camera-ready) – sources as submitted to Eurographics (2021)
+- [`v1.1-revised`](https://github.com/dl-archive/article.2021-eurovis-roomcanvas/tree/v1.1-revised) – author's revised version (2026-11-08): grammar and reference fixes, see [Revisions](#revisions)
+
+## Revisions
+
+`v1.1-revised` (2026-11-08) corrects errors in the camera-ready version without changing its content or layout.
+Every page carries the note "Author's revised version (2026-11-08). Version of record: https://doi.org/10.2312/evs.20211048".
+
+- Grammar: "allows querying time series … for every March", "only requires computing", "can be and … are added", "an up vector, a forward-facing vector, and a text running direction", "pseudo-randomly generated", "Based on" (Figure 2), "six-hour intervals", "built environments that", "industrial facilities that", "from the beginning", "user interaction", "soft shadows", "the challenge is how to scale".
+- References: [She68] "p. 517–524" is now "pp. 517–524".
 
 ## Citation
 
