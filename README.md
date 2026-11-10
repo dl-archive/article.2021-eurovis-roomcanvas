@@ -14,7 +14,8 @@ DOI: [10.2312/evs.20211048](https://doi.org/10.2312/evs.20211048) · Author's ve
 > We showcase an interactive, web-based prototype that allows for the exploration of historical as well as real-time data of multiple temperature and humidity sensors.
 > Finally, we sketch an integrated pipeline from sensor data acquisition to visualization, discuss the creation of semantic geometry and subsequent preprocessing, and provide insights into our real-time rendering implementation.
 
-<p><a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-1.webp" width="24%" alt="page 1"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-2.webp" width="24%" alt="page 2"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-3.webp" width="24%" alt="page 3"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-4.webp" width="24%" alt="page 4"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-5.webp" width="24%" alt="page 5"/></a></p>
+<p><a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-1.webp" width="24%" alt="page 1"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-2.webp" width="24%" alt="page 2"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-3.webp" width="24%" alt="page 3"/></a> <a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-4.webp" width="24%" alt="page 4"/></a></p>
+<details><summary>All 5 pages</summary><p><a href="koenig2021-roomcanvas-as-submitted.pdf"><img src="preview/page-5.webp" width="24%" alt="page 5"/></a></p></details>
 
 ## Contents
 
