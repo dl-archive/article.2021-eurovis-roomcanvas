@@ -4,7 +4,7 @@
 
 *EuroVis 2021 – Short Papers (EuroVis '21)*, June 14–18, 2021, virtual event. Eurographics Association, pp. 13–17.
 
-DOI: [10.2312/evs.20211048](https://doi.org/10.2312/evs.20211048) · Author's version: [Zenodo](https://doi.org/10.5281/zenodo.24059174) · [Live demo](https://roomcanvas.dev/)
+[![Version of record: 10.2312/evs.20211048](https://img.shields.io/badge/Version_of_record-10.2312%2Fevs.20211048-007ec6)](https://doi.org/10.2312/evs.20211048) [![Author's version: 10.5281/zenodo.24059174](https://img.shields.io/badge/Author%27s_version-10.5281%2Fzenodo.24059174-007ec6)](https://doi.org/10.5281/zenodo.24059174) · [Live demo](https://roomcanvas.dev/)
 
 > Spatiotemporal measurements such as power consumption, temperature, humidity, movement, noise, brightness, etc., will become ubiquitously available in both old and modern homes to capture and analyze behavioral patterns.
 > The data is fed into analytics platforms and tapped by services but is generally not readily available to consumers for exploration due in part to its inherent complexity and volume.
